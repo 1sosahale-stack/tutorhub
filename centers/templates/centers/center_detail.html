@@ -1,0 +1,14 @@
+{% extends "centers/base.html" %}
+{% block title %}{{ center.name }} | TutorHub{% endblock %}
+{% block content %}
+  <h1>{{ center.name }}</h1>
+  <p>{{ center.description }}</p>
+  <h2>What we offer</h2>
+  <ul>
+    {% for offering in center.offerings.all %}
+      <li>{{ offering.name }}</li>
+    {% empty %}
+      <li>No offerings listed yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "centers/base.html" %}
+{% block content %}
+  <h1>Tutorial Centers</h1>
+  {% for center in centers %}
+    <p><a href="{% url 'center_detail' center.slug %}">{{ center.name }}</a></p>
+  {% empty %}
+    <p>No centers yet.</p>
+  {% endfor %}
+{% endblock %}
