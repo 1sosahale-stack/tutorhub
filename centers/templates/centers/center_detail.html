@@ -3,12 +3,14 @@
 {% block content %}
   <h1>{{ center.name }}</h1>
   <p>{{ center.description }}</p>
+
   <h2>What we offer</h2>
-  <ul>
-    {% for offering in center.offerings.all %}
-      <li>{{ offering.name }}</li>
-    {% empty %}
-      <li>No offerings listed yet.</li>
-    {% endfor %}
-  </ul>
+  {% for offering in center.offerings.all %}
+    <div class="card">
+      <a href="{% url 'offering_detail' offering.pk %}">{{ offering.name }}</a>
+      <p>{{ offering.description }}</p>
+    </div>
+  {% empty %}
+    <p>No offerings listed yet.</p>
+  {% endfor %}
 {% endblock %}

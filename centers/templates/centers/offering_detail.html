@@ -1,0 +1,16 @@
+{% extends "centers/base.html" %}
+{% block title %}{{ offering.name }} | TutorHub{% endblock %}
+{% block content %}
+  <p><a href="{% url 'center_detail' offering.center.slug %}">&larr; {{ offering.center.name }}</a></p>
+  <h1>{{ offering.name }}</h1>
+  <p>{{ offering.description }}</p>
+
+  <h2>Teachers</h2>
+  {% for teacher in offering.teachers.all %}
+    <div class="card">
+      <a href="{% url 'teacher_detail' teacher.pk %}">{{ teacher.name }}</a>
+    </div>
+  {% empty %}
+    <p>No teachers listed for this yet.</p>
+  {% endfor %}
+{% endblock %}
