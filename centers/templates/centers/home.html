@@ -2,7 +2,9 @@
 {% block content %}
   <h1>Tutorial Centers</h1>
   {% for center in centers %}
-    <p><a href="{% url 'center_detail' center.slug %}">{{ center.name }}</a></p>
+    <div class="card">
+      <a href="{% url 'center_detail' center.slug %}">{{ center.name }}</a>
+    </div>
   {% empty %}
     <p>No centers yet.</p>
   {% endfor %}
