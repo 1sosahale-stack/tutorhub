@@ -1,0 +1,31 @@
+{% extends "centers/base.html" %}
+{% block title %}Edit schedule | TutorHub{% endblock %}
+{% block content %}
+  <p><a href="{% url 'teacher_detail' teacher.pk %}">&larr; Back to {{ teacher.name }}</a></p>
+  <h1>Edit schedule: {{ teacher.name }}</h1>
+  <p class="muted">Click or drag across cells to mark when you're available, then save.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {% include "centers/_calendar.html" with editable=True %}
+    <p><button type="submit">Save schedule</button></p>
+  </form>
+
+  <script>
+    let painting = false, paintValue = false;
+    document.querySelectorAll('.calendar .cell label').forEach(label => {
+      const box = label.querySelector('input');
+      label.addEventListener('click', e => e.preventDefault());
+      label.addEventListener('mousedown', e => {
+        e.preventDefault();
+        painting = true;
+        paintValue = !box.checked;
+        box.checked = paintValue;
+      });
+      label.addEventListener('mouseenter', () => {
+        if (painting) box.checked = paintValue;
+      });
+    });
+    document.addEventListener('mouseup', () => { painting = false; });
+  </script>
+{% endblock %}

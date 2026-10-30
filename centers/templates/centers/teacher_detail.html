@@ -13,4 +13,12 @@
       <li>No subjects listed yet.</li>
     {% endfor %}
   </ul>
+
+  <h2>Weekly availability</h2>
+  <p class="muted">Shaded blocks are times this teacher is available.</p>
+  {% include "centers/_calendar.html" with editable=False %}
+
+  {% if can_edit %}
+    <p><a href="{% url 'schedule_edit' teacher.pk %}">Edit schedule</a></p>
+  {% endif %}
 {% endblock %}

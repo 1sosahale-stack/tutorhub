@@ -8,17 +8,6 @@ body {
   background: #f9fafb;
 }
 
-header {
-  background: #2563eb;
-  padding: 1rem 1.5rem;
-}
-
-header a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.25rem;
-}
-
 main {
   max-width: 800px;
   margin: 2rem auto;
@@ -36,3 +25,40 @@ a { color: #2563eb; }
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
 }
+
+header {
+  background: #2563eb;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+header a { color: #fff; text-decoration: none; font-size: 1.25rem; }
+header .nav a { font-size: 1rem; }
+
+form.inline { display: inline; margin-left: 0.5rem; }
+
+.schedule { border-collapse: collapse; width: 100%; background: #fff; }
+.schedule th, .schedule td { border: 1px solid #e5e7eb; padding: 0.5rem 0.75rem; text-align: left; }
+.schedule th { width: 8rem; background: #f3f4f6; }
+.slot { display: inline-block; background: #dbeafe; border-radius: 4px; padding: 0.15rem 0.5rem; margin-right: 0.35rem; }
+.muted { color: #9ca3af; }
+
+header .nav a { margin-right: 0.75rem; }
+
+.calendar-wrap { overflow-x: auto; }
+.calendar { border-collapse: collapse; width: 100%; min-width: 560px; background: #fff; table-layout: fixed; }
+.calendar th { font-size: 0.8rem; background: #f3f4f6; padding: 0.4rem; border: 1px solid #e5e7eb; }
+.calendar th.corner, .calendar th.time { width: 5rem; background: #fff; border: none; }
+.calendar th.time { text-align: right; font-weight: 400; color: #6b7280; vertical-align: top; padding: 0 0.5rem; }
+.calendar td.cell { border: 1px solid #e5e7eb; height: 1.4rem; padding: 0; }
+.calendar tr.hour td.cell { border-top-color: #9ca3af; }
+.calendar td.on { background: #3b82f6; }
+.calendar label { display: block; cursor: pointer; user-select: none; }
+.calendar label input { display: none; }
+.calendar label span { display: block; height: 1.4rem; }
+.calendar label input:checked + span { background: #3b82f6; }
+.calendar label:hover span { background: #bfdbfe; }
+.calendar label:hover input:checked + span { background: #2563eb; }

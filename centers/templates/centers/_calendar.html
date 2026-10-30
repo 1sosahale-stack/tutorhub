@@ -1,0 +1,31 @@
+<div class="calendar-wrap">
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th class="corner"></th>
+        {% for d in days %}<th>{{ d }}</th>{% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+        <tr{% if row.hour %} class="hour"{% endif %}>
+          <th class="time">{{ row.label }}</th>
+          {% for cell in row.cells %}
+            {% if editable %}
+              <td class="cell">
+                <label>
+                  <input type="checkbox" name="cells"
+                         value="{{ cell.day }}-{{ row.minutes }}"
+                         {% if cell.on %}checked{% endif %}>
+                  <span></span>
+                </label>
+              </td>
+            {% else %}
+              <td class="cell{% if cell.on %} on{% endif %}"></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

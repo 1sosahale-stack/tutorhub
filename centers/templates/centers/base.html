@@ -8,7 +8,27 @@
   <link rel="stylesheet" href="{% static 'centers/style.css' %}">
 </head>
 <body>
-  <header><a href="{% url 'home' %}"><strong>TutorHub</strong></a></header>
+  <header>
+    <a href="{% url 'home' %}"><strong>TutorHub</strong></a>
+        <span class="nav">
+      {% if user.is_authenticated %}
+        {% if user.teacher %}
+          <a href="{% url 'teacher_detail' user.teacher.pk %}">My profile</a>
+          <a href="{% url 'schedule_edit' user.teacher.pk %}">Edit my schedule</a>
+        {% endif %}
+        {% for center in user.administered_centers.all %}
+          <a href="{% url 'center_detail' center.slug %}">{{ center.name }}</a>
+        {% endfor %}
+        {{ user.username }}
+        <form method="post" action="{% url 'logout' %}" class="inline">
+          {% csrf_token %}
+          <button type="submit">Log out</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Log in</a>
+      {% endif %}
+    </span>
+  </header>
   <main>{% block content %}{% endblock %}</main>
 </body>
 </html>
