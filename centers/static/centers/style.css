@@ -62,3 +62,7 @@ header .nav a { margin-right: 0.75rem; }
 .calendar label input:checked + span { background: #3b82f6; }
 .calendar label:hover span { background: #bfdbfe; }
 .calendar label:hover input:checked + span { background: #2563eb; }
+
+.stars { color: #f59e0b; margin-left: 0.5rem; letter-spacing: 1px; }
+.card form.inline { margin-left: 0; margin-top: 0.5rem; display: block; }
+.card form.inline button { margin-right: 0.35rem; }

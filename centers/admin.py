@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Center, Offering, Teacher, AvailabilitySlot
+from .models import Center, Offering, Teacher, AvailabilitySlot, Enrollment
 
 
 class OfferingInline(admin.TabularInline):
@@ -24,3 +24,9 @@ class TeacherAdmin(admin.ModelAdmin):
     list_filter = ("center",)
     filter_horizontal = ("offerings",)
     inlines = [SlotInline]
+
+
+@admin.register(Enrollment)
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("display_name", "teacher", "status", "rating")
+    list_filter = ("status", "teacher")

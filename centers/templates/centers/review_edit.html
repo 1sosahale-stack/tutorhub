@@ -1,0 +1,13 @@
+{% extends "centers/base.html" %}
+{% block title %}Your review | TutorHub{% endblock %}
+{% block content %}
+  <p><a href="{% url 'teacher_detail' enrollment.teacher.pk %}">&larr; Back to {{ enrollment.teacher.name }}</a></p>
+  <h1>Your review of {{ enrollment.teacher.name }}</h1>
+  <p class="muted">Both the rating and the comment are optional.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save review</button>
+  </form>
+{% endblock %}

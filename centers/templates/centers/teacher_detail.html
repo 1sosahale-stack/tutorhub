@@ -21,4 +21,24 @@
   {% if can_edit %}
     <p><a href="{% url 'schedule_edit' teacher.pk %}">Edit schedule</a></p>
   {% endif %}
+
+  <h2>Tutees and reviews</h2>
+  {% if avg_rating %}
+    <p><strong>{{ avg_rating|floatformat:1 }} / 5</strong>
+       <span class="muted">({{ rating_count }} rating{{ rating_count|pluralize }})</span></p>
+  {% endif %}
+
+  {% for e in my_enrollments %}
+    <p><a href="{% url 'review_edit' e.pk %}">{% if e.rating or e.comment %}Edit{% else %}Write{% endif %} your review</a></p>
+  {% endfor %}
+
+  <h3>Current tutees</h3>
+  {% include "centers/_tutee_list.html" with enrollments=current %}
+
+  <h3>Past tutees</h3>
+  {% include "centers/_tutee_list.html" with enrollments=past %}
+
+  {% if can_edit %}
+    <p><a href="{% url 'tutees_manage' teacher.pk %}">Manage tutees</a></p>
+  {% endif %}
 {% endblock %}

@@ -1,0 +1,9 @@
+{% for e in enrollments %}
+  <div class="card">
+    <strong>{{ e.display_name }}</strong>
+    {% if e.rating %}<span class="stars">{{ e.stars }}</span>{% endif %}
+    {% if e.comment %}<p>{{ e.comment|linebreaksbr }}</p>{% endif %}
+  </div>
+{% empty %}
+  <p class="muted">None yet.</p>
+{% endfor %}

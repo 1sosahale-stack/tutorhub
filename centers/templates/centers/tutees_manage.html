@@ -1,0 +1,36 @@
+{% extends "centers/base.html" %}
+{% block title %}Manage tutees | TutorHub{% endblock %}
+{% block content %}
+  <p><a href="{% url 'teacher_detail' teacher.pk %}">&larr; Back to {{ teacher.name }}</a></p>
+  <h1>Tutees: {{ teacher.name }}</h1>
+  <p class="muted">Names are shown publicly, so use a first name and last initial (for example "Ana R.").</p>
+
+  <h2>Add a tutee</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add tutee</button>
+  </form>
+
+  <h2>All tutees</h2>
+  {% for e in enrollments %}
+    <div class="card">
+      <strong>{{ e.display_name }}</strong> ({{ e.get_status_display }})
+      {% if e.tutee %}<span class="muted">linked to {{ e.tutee.username }}</span>{% endif %}
+      {% if e.rating %}<span class="stars">{{ e.stars }}</span>{% endif %}
+      <form method="post" action="{% url 'enrollment_action' e.pk %}" class="inline">
+        {% csrf_token %}
+        {% if e.status == "current" %}
+          <button name="action" value="past">Mark as past</button>
+        {% else %}
+          <button name="action" value="current">Mark as current</button>
+        {% endif %}
+        {% if is_moderator or not e.rating and not e.comment %}
+          <button name="action" value="delete">Remove</button>
+        {% endif %}
+      </form>
+    </div>
+  {% empty %}
+    <p class="muted">No tutees yet.</p>
+  {% endfor %}
+{% endblock %}
